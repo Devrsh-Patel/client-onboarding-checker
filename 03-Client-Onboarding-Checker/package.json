@@ -1,0 +1,27 @@
+{
+  "name": "03-client-onboarding-checker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scalezix Client Onboarding Document Checker & Technical Intake Auditor",
+  "scripts": {
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "test:frontend": "npm --prefix frontend test",
+    "type-check:frontend": "npm --prefix frontend run type-check",
+    "test:backend": "cd backend && python manage.py test",
+    "seed:backend": "cd backend && python manage.py seed_data",
+    "dev:backend": "cd backend && python manage.py runserver 8000"
+  },
+  "keywords": [
+    "scalezix",
+    "onboarding",
+    "document-checker",
+    "django",
+    "react",
+    "gap-analysis",
+    "security-vault"
+  ],
+  "author": "Scalezix Tech Team",
+  "license": "UNLICENSED"
+}
+
