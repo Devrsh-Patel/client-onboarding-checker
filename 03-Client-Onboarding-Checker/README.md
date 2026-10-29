@@ -206,7 +206,31 @@ The platform implements a **Zero-Raw-Credentials Guarantee**:
 
 ---
 
-## 8. License & Attribution
+## 8. Vercel Production Deployment
+
+Scalezix Project 3 is configured for production deployment as two independent projects on Vercel:
+
+1. **Frontend Project (React 19 + Vite)**:
+   - Root Directory: `03-Client-Onboarding-Checker/frontend`
+   - Framework Preset: `Vite`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Environment Variable: `VITE_API_BASE_URL=https://<your-backend>.vercel.app`
+   - SPA Routing: Handled via `frontend/vercel.json` rewrites.
+
+2. **Backend Project (Django 6 REST API)**:
+   - Root Directory: `03-Client-Onboarding-Checker/backend`
+   - Python Runtime: Python 3.13 serverless WSGI (`@vercel/python`)
+   - Entry Point: `config/wsgi.py` and `api/index.py`
+   - Database: Managed PostgreSQL (Neon, Supabase, Vercel Postgres) via `DATABASE_URL`
+   - Static Files: Compressed & cached with WhiteNoise
+   - Environment Variables: `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, `DJANGO_ALLOWED_HOSTS`, `DATABASE_URL`, `CORS_ALLOWED_ORIGINS`, `CSRF_TRUSTED_ORIGINS`
+
+For full step-by-step instructions, see the [Production Deployment Guide](docs/DEPLOYMENT_GUIDE.md).
+
+---
+
+## 9. License & Attribution
 
 Designed and developed for **Scalezix** technology consulting engagements. All rights reserved.
 

@@ -12,7 +12,10 @@ import {
   ServiceType,
 } from '../types';
 
-const API_BASE = '/api';
+const envApiUrl = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+export const API_BASE = envApiUrl
+  ? (envApiUrl.endsWith('/api') ? envApiUrl : `${envApiUrl}/api`)
+  : '/api';
 
 /**
  * Checks if the Django backend API is reachable.
