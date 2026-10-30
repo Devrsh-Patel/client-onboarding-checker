@@ -72,43 +72,45 @@ export const SecurityGuidelinesPage: React.FC = () => {
   const hasSecrets = redactedOutput !== playgroundInput;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8 animate-in fade-in duration-200">
       
       {/* Header */}
-      <div className="scalezix-card p-6 md:p-8 bg-slate-900 text-white mb-8 border-slate-800">
+      <div className="scalezix-card p-5 sm:p-6 md:p-8 bg-slate-900 text-white mb-6 sm:mb-8 border-slate-800">
         <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5 w-fit">
-            <ShieldAlert className="w-3.5 h-3.5" />
-            Security & Zero-Exposure Vault Policy
+          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 px-2.5 py-0.5 rounded-full flex items-center gap-1.5 w-fit">
+            <ShieldAlert className="w-3.5 h-3.5 flex-shrink-0" />
+            <span>Security & Zero-Exposure Vault Policy</span>
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-2">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white mt-2">
             Credential Safeguards & Detection Protocol
           </h1>
-          <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
             Scalezix strictly enforces a zero-raw-credentials policy. Raw secrets must never be stored in onboarding notes, CSV exports, or shared via unencrypted channels.
           </p>
         </div>
       </div>
 
       {/* Interactive Scanner Playground */}
-      <div className="scalezix-card p-6 mb-8 border-slate-200">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+      <div className="scalezix-card p-4 sm:p-6 mb-6 sm:mb-8 border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 mb-4">
           <div>
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-emerald-600" />
-              Live Credential Redaction Simulator
+              <Terminal className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span>Live Credential Redaction Simulator</span>
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Test how the Scalezix automated gap analyzer sanitizes unencrypted notes and masks secret values.
             </p>
           </div>
           {hasSecrets ? (
-            <span className="status-badge status-badge-missing">
-              <AlertTriangle className="w-3 h-3" /> Credentials Detected & Redacted
+            <span className="status-badge status-badge-missing w-fit">
+              <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+              <span>Credentials Detected & Redacted</span>
             </span>
           ) : (
-            <span className="status-badge status-badge-received">
-              <CheckCircle className="w-3 h-3" /> Sanitized / No Secrets Detected
+            <span className="status-badge status-badge-received w-fit">
+              <CheckCircle className="w-3 h-3 flex-shrink-0" />
+              <span>Sanitized / No Secrets Detected</span>
             </span>
           )}
         </div>
@@ -131,7 +133,7 @@ export const SecurityGuidelinesPage: React.FC = () => {
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
               Sanitized Output (Safe for Storage & Export)
             </label>
-            <div className="p-3 bg-slate-900 text-emerald-400 font-mono text-xs rounded-lg border border-slate-800 h-[118px] overflow-y-auto leading-relaxed select-all">
+            <div className="p-3 bg-slate-900 text-emerald-400 font-mono text-xs rounded-lg border border-slate-800 min-h-[118px] max-h-48 overflow-y-auto leading-relaxed select-all break-words">
               {redactedOutput}
             </div>
           </div>
@@ -139,7 +141,7 @@ export const SecurityGuidelinesPage: React.FC = () => {
       </div>
 
       {/* Rules & Patterns Grid */}
-      <div className="scalezix-card p-6 mb-8">
+      <div className="scalezix-card p-4 sm:p-6 mb-6 sm:mb-8">
         <h3 className="text-sm font-bold text-slate-900 mb-4">
           Recognized Secret Signatures & Protocols
         </h3>
@@ -147,23 +149,23 @@ export const SecurityGuidelinesPage: React.FC = () => {
         <div className="divide-y divide-slate-100">
           {CREDENTIAL_RULES.map((rule, idx) => (
             <div key={idx} className="py-4 first:pt-0 last:pb-0">
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
-                <div>
-                  <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="font-bold text-slate-900 text-sm">{rule.name}</span>
-                    <code className="text-[11px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">
+                    <code className="text-[10px] sm:text-[11px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200 break-all">
                       {rule.pattern}
                     </code>
                   </div>
-                  <p className="text-xs text-slate-600 mt-1">
+                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                     <strong>Exposure Risk:</strong> {rule.risk}
                   </p>
-                  <p className="text-xs text-emerald-800 mt-1">
+                  <p className="text-xs text-emerald-800 mt-1 leading-relaxed">
                     <strong>Recommended Protocol:</strong> {rule.remedy}
                   </p>
                 </div>
-                <div className="flex-shrink-0">
-                  <span className="secret-badge text-[11px] bg-red-950 text-red-200 px-2.5 py-1 rounded font-mono border border-red-800">
+                <div className="flex-shrink-0 w-fit">
+                  <span className="secret-badge text-[10px] sm:text-[11px] bg-red-950 text-red-200 px-2.5 py-1 rounded font-mono border border-red-800 inline-block">
                     {rule.redaction}
                   </span>
                 </div>
@@ -174,11 +176,11 @@ export const SecurityGuidelinesPage: React.FC = () => {
       </div>
 
       {/* Recommended Password Manager Workflows */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         
-        <div className="scalezix-card p-6 bg-slate-50 border-slate-200">
+        <div className="scalezix-card p-5 sm:p-6 bg-slate-50 border-slate-200">
           <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center font-bold flex-shrink-0">
               1P
             </div>
             <h4 className="text-sm font-bold text-slate-900">
@@ -192,16 +194,16 @@ export const SecurityGuidelinesPage: React.FC = () => {
             href="https://1password.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1"
+            className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1 min-h-[36px]"
           >
             <span>Learn about 1Password Secure Sharing</span>
-            <ExternalLink className="w-3 h-3" />
+            <ExternalLink className="w-3 h-3 flex-shrink-0" />
           </a>
         </div>
 
-        <div className="scalezix-card p-6 bg-slate-50 border-slate-200">
+        <div className="scalezix-card p-5 sm:p-6 bg-slate-50 border-slate-200">
           <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold flex-shrink-0">
               BW
             </div>
             <h4 className="text-sm font-bold text-slate-900">
@@ -215,10 +217,10 @@ export const SecurityGuidelinesPage: React.FC = () => {
             href="https://bitwarden.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1"
+            className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1 min-h-[36px]"
           >
             <span>Explore Bitwarden Send Documentation</span>
-            <ExternalLink className="w-3 h-3" />
+            <ExternalLink className="w-3 h-3 flex-shrink-0" />
           </a>
         </div>
 

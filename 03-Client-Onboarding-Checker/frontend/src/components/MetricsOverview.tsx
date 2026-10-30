@@ -15,23 +15,23 @@ interface MetricsOverviewProps {
 
 export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ stats, onFilterStatus }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mb-6 sm:mb-8">
       
       {/* Metric 1: Total Active Cases */}
       <div 
         onClick={() => onFilterStatus?.('all')}
-        className="scalezix-card p-5 cursor-pointer relative overflow-hidden group hover:border-slate-400"
+        className="scalezix-card p-4 sm:p-5 cursor-pointer relative overflow-hidden group hover:border-slate-400 active:scale-[0.99] transition-all"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Active Onboardings
           </span>
-          <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-900 group-hover:text-emerald-400 transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-slate-900 group-hover:text-emerald-400 transition-colors flex-shrink-0">
             <FolderGit2 className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-3xl font-extrabold text-slate-900 font-mono">
+          <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">
             {stats.total_cases}
           </span>
           <span className="text-xs font-medium text-slate-500">
@@ -49,18 +49,18 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ stats, onFilte
       {/* Metric 2: Missing Items */}
       <div 
         onClick={() => onFilterStatus?.('missing')}
-        className="scalezix-card p-5 cursor-pointer relative overflow-hidden group hover:border-rose-300"
+        className="scalezix-card p-4 sm:p-5 cursor-pointer relative overflow-hidden group hover:border-rose-300 active:scale-[0.99] transition-all"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Missing Requirements
           </span>
-          <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors flex-shrink-0">
             <AlertTriangle className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-3xl font-extrabold text-rose-600 font-mono">
+          <span className="text-2xl sm:text-3xl font-extrabold text-rose-600 font-mono">
             {stats.total_missing_items}
           </span>
           <span className="text-xs font-medium text-slate-500">
@@ -76,15 +76,15 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ stats, onFilte
       {/* Metric 3: Security & Credential Concerns */}
       <div 
         onClick={() => onFilterStatus?.('security')}
-        className={`scalezix-card p-5 cursor-pointer relative overflow-hidden group ${
+        className={`scalezix-card p-4 sm:p-5 cursor-pointer relative overflow-hidden group active:scale-[0.99] transition-all ${
           stats.total_security_concerns > 0 ? 'border-red-200 bg-red-50/20' : ''
         }`}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Security & Credential Alerts
           </span>
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors flex-shrink-0 ${
             stats.total_security_concerns > 0 
               ? 'bg-red-100 text-red-600' 
               : 'bg-emerald-50 text-emerald-600'
@@ -93,7 +93,7 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ stats, onFilte
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className={`text-3xl font-extrabold font-mono ${
+          <span className={`text-2xl sm:text-3xl font-extrabold font-mono ${
             stats.total_security_concerns > 0 ? 'text-red-600' : 'text-slate-900'
           }`}>
             {stats.total_security_concerns}
@@ -121,18 +121,18 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ stats, onFilte
       {/* Metric 4: Ready for Development */}
       <div 
         onClick={() => onFilterStatus?.('approved')}
-        className="scalezix-card p-5 cursor-pointer relative overflow-hidden group hover:border-emerald-300"
+        className="scalezix-card p-4 sm:p-5 cursor-pointer relative overflow-hidden group hover:border-emerald-300 active:scale-[0.99] transition-all"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Approved For Kickoff
           </span>
-          <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors flex-shrink-0">
             <CheckCircle2 className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-3xl font-extrabold text-emerald-700 font-mono">
+          <span className="text-2xl sm:text-3xl font-extrabold text-emerald-700 font-mono">
             {stats.ready_cases_count}
           </span>
           <span className="text-xs font-medium text-slate-500">

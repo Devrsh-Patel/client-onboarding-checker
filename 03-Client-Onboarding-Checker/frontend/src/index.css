@@ -317,18 +317,34 @@ code, pre, .mono {
   align-items: center;
   justify-content: center;
   z-index: 50;
-  padding: 1.5rem;
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .modal-backdrop {
+    padding: 1.5rem;
+  }
 }
 
 .modal-content {
   background: #FFFFFF;
-  border-radius: 1rem;
+  border-radius: 0.875rem;
   border: 1px solid var(--navy-200);
   box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
   width: 100%;
   max-width: 640px;
-  max-height: 90vh;
+  max-height: calc(100vh - 1.5rem);
+  max-height: calc(100dvh - 1.5rem);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .modal-content {
+    border-radius: 1rem;
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
 }
 
 /* ── Form Inputs ────────────────────────────────────────────────────────── */
@@ -617,5 +633,34 @@ a {
 .inline-flex { display: inline-flex; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
+
+/* ── Mobile Touch & Smooth Scroll Utilities ────────────────────────────── */
+.touch-pan-x {
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.touch-manipulation {
+  touch-action: manipulation;
+}
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.break-all {
+  word-break: break-all;
+}
+
 
 

@@ -228,57 +228,57 @@ export const CaseDetailPage: React.FC = () => {
   ).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8 animate-in fade-in duration-200">
       
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-xs text-slate-500 mb-4">
-        <Link to="/" className="hover:text-slate-900 transition-colors">
+      <nav className="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-500 mb-4 overflow-x-auto whitespace-nowrap py-1">
+        <Link to="/" className="hover:text-slate-900 transition-colors flex-shrink-0">
           Dashboard
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <Link to="/cases" className="hover:text-slate-900 transition-colors">
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+        <Link to="/cases" className="hover:text-slate-900 transition-colors flex-shrink-0">
           Onboarding Cases
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <span className="font-semibold text-slate-800 truncate">
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+        <span className="font-semibold text-slate-800 truncate max-w-[200px] sm:max-w-md">
           {caseData.project_name}
         </span>
       </nav>
 
       {/* Case Header Card */}
-      <div className="scalezix-card p-6 md:p-8 mb-8 bg-white border-slate-200 shadow-sm">
+      <div className="scalezix-card p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 bg-white border-slate-200 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           
           {/* Left: Project & Client Details */}
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded border border-slate-200">
                 {caseData.service_type_display}
               </span>
               {securityAlertsCount > 0 && (
                 <span className="text-xs font-bold bg-red-100 text-red-800 border border-red-300 px-2.5 py-0.5 rounded flex items-center gap-1">
-                  <ShieldAlert className="w-3.5 h-3.5 text-red-600" />
-                  {securityAlertsCount} Security Alert{securityAlertsCount > 1 ? 's' : ''}
+                  <ShieldAlert className="w-3.5 h-3.5 text-red-600 flex-shrink-0" />
+                  <span>{securityAlertsCount} Security Alert{securityAlertsCount > 1 ? 's' : ''}</span>
                 </span>
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight break-words">
               {caseData.project_name}
             </h1>
 
-            <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-600">
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-600">
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
-                <Building2 className="w-4 h-4 text-slate-400" />
+                <Building2 className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <span>{caseData.client.company}</span>
                 <span className="text-slate-400">({caseData.client.name})</span>
               </div>
 
               <div className="flex items-center gap-1.5 text-slate-500">
-                <Mail className="w-4 h-4 text-slate-400" />
+                <Mail className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <a 
                   href={`mailto:${caseData.client.contact_email}`} 
-                  className="hover:text-emerald-600 underline font-mono"
+                  className="hover:text-emerald-600 underline font-mono break-all"
                 >
                   {caseData.client.contact_email}
                 </a>
@@ -286,7 +286,7 @@ export const CaseDetailPage: React.FC = () => {
 
               {caseData.target_launch_date && (
                 <div className="flex items-center gap-1.5 text-slate-500">
-                  <Calendar className="w-4 h-4 text-slate-400" />
+                  <Calendar className="w-4 h-4 text-slate-400 flex-shrink-0" />
                   <span>Target Kickoff: <strong>{caseData.target_launch_date}</strong></span>
                 </div>
               )}
@@ -294,7 +294,7 @@ export const CaseDetailPage: React.FC = () => {
           </div>
 
           {/* Right: Status Dropdown & Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:items-end gap-2.5 sm:gap-3 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
             
             {/* Status Selector */}
             <div className="w-full sm:w-auto">
@@ -304,7 +304,7 @@ export const CaseDetailPage: React.FC = () => {
               <select
                 value={caseData.status}
                 onChange={(e) => handleStatusChange(e.target.value as CaseStatus)}
-                className="select-field text-xs font-semibold py-1.5"
+                className="select-field text-xs font-semibold py-1.5 min-h-[38px] w-full"
               >
                 <option value="draft">Draft Intake</option>
                 <option value="in_review">In Technical Review</option>
@@ -315,42 +315,42 @@ export const CaseDetailPage: React.FC = () => {
             </div>
 
             {/* Export Dropdown */}
-            <div className="relative w-full sm:w-auto mt-4 sm:mt-5">
+            <div className="relative w-full sm:w-auto">
               <button
                 onClick={() => setShowExportMenu(!showExportMenu)}
-                className="btn-secondary text-xs w-full sm:w-auto justify-between"
+                className="btn-secondary text-xs w-full sm:w-auto justify-between min-h-[38px]"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Export Reports</span>
               </button>
 
               {showExportMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-lg z-30 py-2 animate-in fade-in duration-150">
+                <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-full sm:w-56 bg-white border border-slate-200 rounded-xl shadow-lg z-30 py-2 animate-in fade-in duration-150">
                   <a
                     href={getExportCsvUrl(caseData.id)}
                     download
-                    className="flex items-center gap-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-emerald-700 font-medium"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 hover:text-emerald-700 font-medium"
                     onClick={() => setShowExportMenu(false)}
                   >
-                    <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
+                    <FileSpreadsheet className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                     <span>Checklist Audit CSV</span>
                   </a>
                   <a
                     href={getExportMissingCsvUrl(caseData.id)}
                     download
-                    className="flex items-center gap-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-rose-700 font-medium"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 hover:text-rose-700 font-medium"
                     onClick={() => setShowExportMenu(false)}
                   >
-                    <FileSpreadsheet className="w-4 h-4 text-rose-600" />
+                    <FileSpreadsheet className="w-4 h-4 text-rose-600 flex-shrink-0" />
                     <span>Missing Items CSV</span>
                   </a>
                   <a
                     href={getExportReportMdUrl(caseData.id)}
                     download
-                    className="flex items-center gap-2 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-sky-700 font-medium"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 hover:text-sky-700 font-medium"
                     onClick={() => setShowExportMenu(false)}
                   >
-                    <FileText className="w-4 h-4 text-sky-600" />
+                    <FileText className="w-4 h-4 text-sky-600 flex-shrink-0" />
                     <span>Review Report (.md)</span>
                   </a>
                 </div>
@@ -358,13 +358,13 @@ export const CaseDetailPage: React.FC = () => {
             </div>
 
             {/* Quick Generate Follow-Up Button */}
-            <div className="w-full sm:w-auto mt-4 sm:mt-5">
+            <div className="w-full sm:w-auto">
               <button
                 onClick={handleGenerateFollowUp}
                 disabled={isGeneratingFollowUp}
-                className="btn-primary text-xs w-full sm:w-auto"
+                className="btn-primary text-xs w-full sm:w-auto min-h-[38px] justify-center"
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>{isGeneratingFollowUp ? 'Drafting...' : 'Follow-Up Email'}</span>
               </button>
             </div>
@@ -374,8 +374,8 @@ export const CaseDetailPage: React.FC = () => {
         </div>
 
         {/* Progress Metric Bar */}
-        <div className="mt-6 pt-6 border-t border-slate-100">
-          <div className="flex items-center justify-between text-xs mb-2">
+        <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-slate-100">
+          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1 text-xs mb-2">
             <div className="flex items-center gap-2">
               <span className="font-bold text-slate-800">Intake Readiness:</span>
               <span className="font-mono font-bold text-emerald-700">
@@ -398,28 +398,28 @@ export const CaseDetailPage: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex items-center gap-2 border-b border-slate-200 mb-6 overflow-x-auto pb-1">
+      <div className="flex items-center gap-1 sm:gap-2 border-b border-slate-200 mb-6 overflow-x-auto pb-1 touch-pan-x">
         <button
           onClick={() => setActiveTab('checklist')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap min-h-[44px] ${
             activeTab === 'checklist'
               ? 'border-emerald-500 text-slate-950 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
           }`}
         >
-          <ListChecks className="w-4 h-4" />
+          <ListChecks className="w-4 h-4 flex-shrink-0" />
           <span>Checklist Matrix ({caseData.submissions.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('findings')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap min-h-[44px] ${
             activeTab === 'findings'
               ? 'border-emerald-500 text-slate-950 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
           }`}
         >
-          <AlertTriangle className="w-4 h-4" />
+          <AlertTriangle className="w-4 h-4 flex-shrink-0" />
           <span>Gap Findings & Alerts</span>
           {openFindingsCount > 0 && (
             <span className="bg-amber-100 text-amber-900 font-mono text-[10px] px-1.5 py-0.2 rounded-full font-bold">
@@ -430,28 +430,28 @@ export const CaseDetailPage: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('followup')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap min-h-[44px] ${
             activeTab === 'followup'
               ? 'border-emerald-500 text-slate-950 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
           }`}
         >
-          <Mail className="w-4 h-4" />
+          <Mail className="w-4 h-4 flex-shrink-0" />
           <span>Client Follow-Up Composer</span>
           {caseData.follow_up_message && (
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
           )}
         </button>
 
         <button
           onClick={() => setActiveTab('activity')}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold border-b-2 transition-colors whitespace-nowrap min-h-[44px] ${
             activeTab === 'activity'
               ? 'border-emerald-500 text-slate-950 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
           }`}
         >
-          <Clock className="w-4 h-4" />
+          <Clock className="w-4 h-4 flex-shrink-0" />
           <span>Activity Log ({caseData.activity_logs.length})</span>
         </button>
       </div>

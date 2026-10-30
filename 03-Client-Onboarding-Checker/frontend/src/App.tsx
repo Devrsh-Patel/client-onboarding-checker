@@ -61,17 +61,19 @@ export const App: React.FC = () => {
 
         {/* Scalezix Enterprise Footer */}
         <footer className="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-xs">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-white">SCALEZIX</span>
-              <span className="text-slate-600">|</span>
-              <span>Technical Onboarding Document Checker</span>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+              <span className="font-extrabold text-white tracking-wide">SCALEZIX</span>
+              <span className="text-slate-600 hidden sm:inline">|</span>
+              <span className="text-slate-400">Technical Onboarding Document Checker</span>
             </div>
-            <div className="flex items-center gap-6 text-[11px]">
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1.5 text-[11px]">
               <span className="text-emerald-400 font-mono">
                 {isBackendConnected ? 'Backend Connected' : 'Demo Offline Mode'}
               </span>
+              <span className="hidden sm:inline text-slate-700">•</span>
               <span>Zero Credential Exposure Guarantee</span>
+              <span className="hidden sm:inline text-slate-700">•</span>
               <span>© {new Date().getFullYear()} Scalezix Technologies</span>
             </div>
           </div>

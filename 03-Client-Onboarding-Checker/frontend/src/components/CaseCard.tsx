@@ -75,20 +75,20 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseItem }) => {
   };
 
   return (
-    <div className="scalezix-card p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-200">
+    <div className="scalezix-card p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-200">
       
       {/* Top Header: Company, Service, and Status */}
       <div>
-        <div className="flex items-start justify-between gap-3 mb-2">
+        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-md bg-slate-100 border border-slate-200">
+            <span className="p-1.5 rounded-md bg-slate-100 border border-slate-200 flex-shrink-0">
               {getServiceIcon(caseItem.service_type)}
             </span>
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               {caseItem.service_type_display}
             </span>
           </div>
-          {getStatusBadge(caseItem.status)}
+          <div>{getStatusBadge(caseItem.status)}</div>
         </div>
 
         {/* Project Name and Client Name */}
@@ -96,26 +96,26 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseItem }) => {
           to={`/cases/${caseItem.id}`}
           className="group block mt-2 focus:outline-none"
         >
-          <h3 className="text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors line-clamp-1">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors break-words line-clamp-2">
             {caseItem.project_name}
           </h3>
-          <div className="flex items-center gap-1.5 text-xs text-slate-600 mt-1">
-            <Building2 className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-600 mt-1">
+            <Building2 className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
             <span className="font-medium text-slate-700">{caseItem.client_company}</span>
             <span className="text-slate-300">•</span>
-            <span>{caseItem.client_name}</span>
+            <span className="text-slate-600">{caseItem.client_name}</span>
           </div>
         </Link>
 
         {/* Template info */}
-        <div className="mt-3 text-xs text-slate-500 flex items-center gap-1.5">
+        <div className="mt-3 text-xs text-slate-500 flex flex-wrap items-center gap-1.5">
           <span className="text-slate-400">Template:</span>
-          <span className="font-medium text-slate-700">{caseItem.template_name}</span>
+          <span className="font-medium text-slate-700 truncate max-w-full">{caseItem.template_name}</span>
         </div>
       </div>
 
       {/* Middle: Progress and Readiness */}
-      <div className="my-5 pt-4 border-t border-slate-100">
+      <div className="my-4 sm:my-5 pt-4 border-t border-slate-100">
         <div className="flex items-center justify-between text-xs mb-1.5">
           <span className="font-semibold text-slate-700">Checklist Completion</span>
           <span className="font-mono font-bold text-slate-900">
@@ -134,22 +134,22 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseItem }) => {
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {caseItem.has_security_warnings && (
             <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded">
-              <ShieldAlert className="w-3 h-3 text-red-600" />
-              Credential Alert
+              <ShieldAlert className="w-3 h-3 text-red-600 flex-shrink-0" />
+              <span>Credential Alert</span>
             </span>
           )}
 
           {caseItem.open_findings_count > 0 && (
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">
-              <AlertCircle className="w-3 h-3 text-amber-600" />
-              {caseItem.open_findings_count} open {caseItem.open_findings_count === 1 ? 'gap' : 'gaps'}
+              <AlertCircle className="w-3 h-3 text-amber-600 flex-shrink-0" />
+              <span>{caseItem.open_findings_count} open {caseItem.open_findings_count === 1 ? 'gap' : 'gaps'}</span>
             </span>
           )}
 
           {caseItem.target_launch_date && (
-            <span className="inline-flex items-center gap-1 text-[11px] text-slate-500 ml-auto">
-              <Calendar className="w-3 h-3 text-slate-400" />
-              Target: {caseItem.target_launch_date}
+            <span className="inline-flex items-center gap-1 text-[11px] text-slate-500 w-full sm:w-auto sm:ml-auto">
+              <Calendar className="w-3 h-3 text-slate-400 flex-shrink-0" />
+              <span>Target: {caseItem.target_launch_date}</span>
             </span>
           )}
         </div>
@@ -159,10 +159,10 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseItem }) => {
       <div className="pt-3 border-t border-slate-100 flex items-center justify-end">
         <Link
           to={`/cases/${caseItem.id}`}
-          className="btn-secondary text-xs w-full justify-between group"
+          className="btn-secondary text-xs w-full justify-between group min-h-[40px] sm:min-h-[38px] px-3.5"
         >
           <span>Open Review Console</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
         </Link>
       </div>
 

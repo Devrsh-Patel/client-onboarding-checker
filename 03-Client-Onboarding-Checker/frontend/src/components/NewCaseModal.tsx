@@ -143,30 +143,31 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
       <div className="modal-content animate-in fade-in duration-200">
         
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center flex-shrink-0">
               <FolderPlus className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
                 New Client Onboarding Case
               </h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-[11px] sm:text-xs text-slate-500">
                 Initialize a structured document intake and gap audit workbench.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            className="p-1.5 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
           
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-start gap-2">
@@ -208,14 +209,14 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
                 </select>
               </div>
             ) : (
-              <div className="space-y-2 pt-1">
-                <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-2.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <input
                     type="text"
                     placeholder="Company Name *"
                     value={newClientCompany}
                     onChange={(e) => setNewClientCompany(e.target.value)}
-                    className="input-field text-xs"
+                    className="input-field text-xs min-h-[38px]"
                     required
                   />
                   <input
@@ -223,17 +224,17 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
                     placeholder="Primary Contact Name *"
                     value={newClientName}
                     onChange={(e) => setNewClientName(e.target.value)}
-                    className="input-field text-xs"
+                    className="input-field text-xs min-h-[38px]"
                     required
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <input
                     type="email"
                     placeholder="Contact Email *"
                     value={newClientEmail}
                     onChange={(e) => setNewClientEmail(e.target.value)}
-                    className="input-field text-xs"
+                    className="input-field text-xs min-h-[38px]"
                     required
                   />
                   <input
@@ -241,7 +242,7 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
                     placeholder="Phone (optional)"
                     value={newClientPhone}
                     onChange={(e) => setNewClientPhone(e.target.value)}
-                    className="input-field text-xs"
+                    className="input-field text-xs min-h-[38px]"
                   />
                 </div>
               </div>
@@ -330,11 +331,11 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
           </div>
 
           {/* Submit Actions */}
-          <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+          <div className="pt-3.5 sm:pt-4 border-t border-slate-200 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="btn-secondary text-xs"
+              className="btn-secondary text-xs w-full sm:w-auto min-h-[40px] sm:min-h-[38px] justify-center"
               disabled={isSubmitting}
             >
               Cancel
@@ -342,9 +343,9 @@ export const NewCaseModal: React.FC<NewCaseModalProps> = ({ isOpen, onClose, onC
             <button
               type="submit"
               disabled={isSubmitting || isLoading}
-              className="btn-primary text-xs"
+              className="btn-primary text-xs w-full sm:w-auto min-h-[40px] sm:min-h-[38px] justify-center"
             >
-              <CheckCircle2 className="w-4 h-4" />
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
               <span>{isSubmitting ? 'Creating Case...' : 'Create & Open Case'}</span>
             </button>
           </div>

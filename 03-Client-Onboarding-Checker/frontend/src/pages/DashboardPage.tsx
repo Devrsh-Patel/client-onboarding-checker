@@ -73,39 +73,39 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8 animate-in fade-in duration-200">
       
       {/* Executive Welcome & Banner */}
-      <div className="scalezix-card p-6 md:p-8 bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white mb-8 border-slate-800 relative overflow-hidden shadow-xl">
+      <div className="scalezix-card p-5 sm:p-6 md:p-8 bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 text-white mb-6 sm:mb-8 border-slate-800 relative overflow-hidden shadow-xl">
         <div className="relative z-10 max-w-3xl">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded-full">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded-full">
               Scalezix Client Success Platform
             </span>
-            <span className="text-xs text-slate-400 font-mono">v1.0.0</span>
+            <span className="text-[10px] sm:text-xs text-slate-400 font-mono">v1.0.0</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight">
             Client Onboarding Document Checker
           </h1>
-          <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
             Eliminate project kickoff delays and security blindspots. Audit client credentials, verify technical requirements against standardized blueprints, and generate polite, structured follow-up letters in seconds.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
             <button
               onClick={onOpenNewCase}
-              className="btn-primary text-xs"
+              className="btn-primary text-xs sm:text-sm min-h-[40px] sm:min-h-[38px] justify-center"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 flex-shrink-0" />
               <span>Initialize New Intake Case</span>
             </button>
             <a
               href="#cases-grid"
-              className="btn-secondary bg-slate-800/80 text-white border-slate-700 hover:bg-slate-700 text-xs"
+              className="btn-secondary bg-slate-800/80 text-white border-slate-700 hover:bg-slate-700 text-xs sm:text-sm min-h-[40px] sm:min-h-[38px] justify-center"
             >
               <span>Explore Active Cases ({cases.length})</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
             </a>
           </div>
         </div>
@@ -122,7 +122,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
       />
 
       {/* Search & Filters Toolbar */}
-      <div id="cases-grid" className="scalezix-card p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div id="cases-grid" className="scalezix-card p-3.5 sm:p-4 mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
         
         {/* Search Input */}
         <div className="relative w-full md:w-80">
@@ -134,42 +134,44 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by client, project, or company..."
-            className="input-field pl-9 text-xs"
+            className="input-field pl-9 text-xs min-h-[38px]"
           />
         </div>
 
         {/* Status and Service Filters */}
-        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 mr-2">
-            <Filter className="w-3.5 h-3.5 text-slate-400" />
-            <span>Filter:</span>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 sm:mr-1">
+            <Filter className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+            <span className="font-medium">Filter:</span>
           </div>
 
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="select-field text-xs py-1.5 w-auto"
-          >
-            <option value="all">All Case Statuses</option>
-            <option value="in_review">In Review</option>
-            <option value="awaiting_client">Awaiting Client</option>
-            <option value="approved">Approved for Kickoff</option>
-            <option value="blocked">Blocked</option>
-            <option value="missing">With Missing Items</option>
-            <option value="security">With Security Alerts</option>
-          </select>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1 md:flex-initial">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="select-field text-xs py-1.5 w-full min-h-[38px]"
+            >
+              <option value="all">All Case Statuses</option>
+              <option value="in_review">In Review</option>
+              <option value="awaiting_client">Awaiting Client</option>
+              <option value="approved">Approved for Kickoff</option>
+              <option value="blocked">Blocked</option>
+              <option value="missing">With Missing Items</option>
+              <option value="security">With Security Alerts</option>
+            </select>
 
-          <select
-            value={serviceFilter}
-            onChange={(e) => setServiceFilter(e.target.value)}
-            className="select-field text-xs py-1.5 w-auto"
-          >
-            <option value="all">All Service Types</option>
-            <option value="web_app">Web Application / MVP</option>
-            <option value="ai_agent">AI Agent / LLM Integration</option>
-            <option value="cloud_infrastructure">Cloud Infrastructure & DevOps</option>
-            <option value="branding_design">Brand & UI/UX</option>
-          </select>
+            <select
+              value={serviceFilter}
+              onChange={(e) => setServiceFilter(e.target.value)}
+              className="select-field text-xs py-1.5 w-full min-h-[38px]"
+            >
+              <option value="all">All Service Types</option>
+              <option value="web_app">Web Application / MVP</option>
+              <option value="ai_agent">AI Agent / LLM Integration</option>
+              <option value="cloud_infrastructure">Cloud Infrastructure & DevOps</option>
+              <option value="branding_design">Brand & UI/UX</option>
+            </select>
+          </div>
         </div>
 
       </div>
@@ -181,7 +183,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
           <p className="text-xs text-slate-500">Loading onboarding cases...</p>
         </div>
       ) : filteredCases.length === 0 ? (
-        <div className="scalezix-card p-12 text-center">
+        <div className="scalezix-card p-8 sm:p-12 text-center">
           <FolderGit2 className="w-12 h-12 text-slate-300 mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-800">No Matching Onboarding Cases</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-5">
@@ -193,13 +195,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
               setStatusFilter('all');
               setServiceFilter('all');
             }}
-            className="btn-secondary text-xs"
+            className="btn-secondary text-xs min-h-[38px]"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredCases.map((c) => (
             <CaseCard key={c.id} caseItem={c} />
           ))}
@@ -207,33 +209,33 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onOpenNewCase }) =
       )}
 
       {/* Scalezix Intake Best Practices Card */}
-      <div className="mt-12 scalezix-card p-6 bg-slate-50 border-slate-200">
+      <div className="mt-8 sm:mt-12 scalezix-card p-5 sm:p-6 bg-slate-50 border-slate-200">
         <h3 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          Scalezix Technical Intake Standard Operating Procedures (SOP)
+          <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+          <span>Scalezix Technical Intake Standard Operating Procedures (SOP)</span>
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-600">
-          <div className="p-3 bg-white rounded-lg border border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 text-xs text-slate-600">
+          <div className="p-3.5 bg-white rounded-lg border border-slate-200">
             <span className="font-bold text-slate-800 block mb-1">
               1. Conservative Credential Security
             </span>
-            <p>
+            <p className="leading-relaxed">
               Never accept or store raw passwords, IAM secret keys, or payment tokens in plain text notes. Always verify that client credentials pass through an encrypted vault link.
             </p>
           </div>
-          <div className="p-3 bg-white rounded-lg border border-slate-200">
+          <div className="p-3.5 bg-white rounded-lg border border-slate-200">
             <span className="font-bold text-slate-800 block mb-1">
               2. Human Confirmed Findings
             </span>
-            <p>
+            <p className="leading-relaxed">
               Automated gap checks provide high-speed verification, but all critical blocking items and security warnings must be reviewed and confirmed by an assigned lead engineer.
             </p>
           </div>
-          <div className="p-3 bg-white rounded-lg border border-slate-200">
+          <div className="p-3.5 bg-white rounded-lg border border-slate-200">
             <span className="font-bold text-slate-800 block mb-1">
               3. Deterministic Fallback Integrity
             </span>
-            <p>
+            <p className="leading-relaxed">
               Our rule-based engine operates deterministically with zero hallucination risk, guaranteeing consistent audit reports even when offline or during LLM rate limits.
             </p>
           </div>

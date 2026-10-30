@@ -130,31 +130,39 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
           <div key={category} className="scalezix-card overflow-hidden">
             
             {/* Category Header */}
-            <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold tracking-tight">
+            <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-sm font-bold tracking-tight text-white">
                     {catMeta.label}
                   </h3>
-                  <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-slate-800 text-emerald-400 border border-slate-700 whitespace-nowrap">
                     {receivedCount} of {items.length} verified
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
                   {catMeta.description}
                 </p>
               </div>
             </div>
 
-            {/* Submissions Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+            {/* Mobile Scroll Affordance Banner */}
+            <div className="md:hidden px-4 py-1.5 bg-slate-100/90 border-b border-slate-200 text-[11px] text-slate-600 flex items-center justify-between">
+              <span className="font-medium flex items-center gap-1">
+                <span>←</span> Scroll horizontally for evidence & actions <span>→</span>
+              </span>
+              <span className="font-mono text-[10px] text-slate-500 uppercase">{items.length} items</span>
+            </div>
+
+            {/* Submissions Table with Responsive Scroll */}
+            <div className="overflow-x-auto touch-pan-x">
+              <table className="w-full text-left text-xs min-w-[620px]">
                 <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-semibold">
                   <tr>
-                    <th className="py-3 px-5 w-2/5">Requirement & Evidence Criteria</th>
-                    <th className="py-3 px-4 w-36">Status</th>
-                    <th className="py-3 px-4 w-1/4">Submitted Evidence / Notes</th>
-                    <th className="py-3 px-4 text-right w-28">Actions</th>
+                    <th className="py-3 px-4 sm:px-5 w-2/5 min-w-[240px]">Requirement & Evidence Criteria</th>
+                    <th className="py-3 px-3 sm:px-4 w-36 min-w-[140px]">Status</th>
+                    <th className="py-3 px-3 sm:px-4 w-1/4 min-w-[160px]">Submitted Evidence / Notes</th>
+                    <th className="py-3 px-4 text-right w-28 min-w-[100px]">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -170,23 +178,23 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
                         }`}
                       >
                         {/* Title and Acceptable Evidence */}
-                        <td className="py-4 px-5 align-top">
-                          <div className="flex items-baseline gap-2">
-                            <span className="font-bold text-slate-900 text-sm">
+                        <td className="py-3.5 sm:py-4 px-4 sm:px-5 align-top">
+                          <div className="flex flex-wrap items-baseline gap-2">
+                            <span className="font-bold text-slate-900 text-sm break-words">
                               {item.title}
                             </span>
                             {item.is_required ? (
-                              <span className="text-[10px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-1.5 py-0.2 rounded uppercase">
+                              <span className="text-[10px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-1.5 py-0.2 rounded uppercase whitespace-nowrap">
                                 Required
                               </span>
                             ) : (
-                              <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200 px-1.5 py-0.2 rounded uppercase">
+                              <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200 px-1.5 py-0.2 rounded uppercase whitespace-nowrap">
                                 Optional
                               </span>
                             )}
                           </div>
                           
-                          <p className="text-slate-600 text-xs mt-1 leading-relaxed">
+                          <p className="text-slate-600 text-xs mt-1 leading-relaxed break-words">
                             {item.description}
                           </p>
                           
@@ -194,20 +202,20 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
                             <span className="font-semibold text-slate-700 whitespace-nowrap">
                               Evidence:
                             </span>
-                            <span className="text-slate-600">
+                            <span className="text-slate-600 break-words">
                               {item.acceptable_evidence}
                             </span>
                           </div>
                         </td>
 
                         {/* Status with Quick Dropdown */}
-                        <td className="py-4 px-4 align-top">
+                        <td className="py-3.5 sm:py-4 px-3 sm:px-4 align-top">
                           <div className="space-y-1.5">
                             <div>{getStatusBadge(sub.received_status)}</div>
                             <select
                               value={sub.received_status}
                               onChange={(e) => onQuickStatusChange(sub.id, e.target.value as SubmissionStatus)}
-                              className="text-[11px] py-1 px-2 border border-slate-200 rounded bg-white text-slate-700 hover:border-slate-300 focus:outline-none focus:border-emerald-500 cursor-pointer w-full"
+                              className="text-[11px] py-1.5 px-2 border border-slate-200 rounded bg-white text-slate-700 hover:border-slate-300 focus:outline-none focus:border-emerald-500 cursor-pointer w-full min-h-[36px]"
                             >
                               <option value="received">Received</option>
                               <option value="missing">Missing</option>
@@ -220,11 +228,11 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
                         </td>
 
                         {/* File Name & Reviewer Notes */}
-                        <td className="py-4 px-4 align-top">
+                        <td className="py-3.5 sm:py-4 px-3 sm:px-4 align-top">
                           {sub.file_name ? (
                             <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-slate-800 bg-slate-100 px-2 py-1 rounded border border-slate-200 w-fit max-w-full truncate mb-1.5">
                               <FileText className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
-                              <span className="truncate">{sub.file_name}</span>
+                              <span className="truncate max-w-[180px] sm:max-w-[220px]">{sub.file_name}</span>
                             </div>
                           ) : (
                             <span className="text-xs text-slate-400 italic block mb-1.5">
@@ -233,15 +241,15 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
                           )}
 
                           {sub.reviewer_notes && (
-                            <div className={`text-xs p-2 rounded border ${
+                            <div className={`text-xs p-2 rounded border break-words ${
                               sub.has_sensitive_data 
                                 ? 'bg-red-50 text-red-900 border-red-200' 
                                 : 'bg-slate-50 text-slate-700 border-slate-200'
                             }`}>
                               {sub.has_sensitive_data && (
                                 <div className="flex items-center gap-1 text-[11px] font-bold text-red-700 mb-1">
-                                  <ShieldAlert className="w-3 h-3 text-red-600" />
-                                  Credential Warning Detected
+                                  <ShieldAlert className="w-3 h-3 text-red-600 flex-shrink-0" />
+                                  <span>Credential Warning Detected</span>
                                 </div>
                               )}
                               <p className="line-clamp-2 leading-relaxed">
@@ -252,10 +260,10 @@ export const CaseChecklistTable: React.FC<CaseChecklistTableProps> = ({
                         </td>
 
                         {/* Actions */}
-                        <td className="py-4 px-4 align-top text-right">
+                        <td className="py-3.5 sm:py-4 px-4 align-top text-right">
                           <button
                             onClick={() => onOpenUploadModal(sub)}
-                            className="btn-secondary text-xs px-2.5 py-1.5 inline-flex items-center gap-1"
+                            className="btn-secondary text-xs px-3 py-1.5 inline-flex items-center gap-1 min-h-[36px]"
                             title="Update submission evidence and review notes"
                           >
                             <Edit3 className="w-3.5 h-3.5" />

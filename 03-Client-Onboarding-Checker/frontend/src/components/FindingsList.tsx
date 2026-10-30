@@ -77,29 +77,29 @@ export const FindingsList: React.FC<FindingsListProps> = ({
       {/* Security Guidance Callout Banner (If any security finding exists) */}
       {securityFindings.length > 0 && (
         <div className="security-alert-box animate-in fade-in duration-300">
-          <div className="flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-red-100 text-red-700">
-              <ShieldAlert className="w-6 h-6" />
+          <div className="flex items-start gap-2.5 sm:gap-3">
+            <div className="p-2 rounded-lg bg-red-100 text-red-700 flex-shrink-0">
+              <ShieldAlert className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div className="space-y-2 flex-1">
-              <div className="flex items-center justify-between">
+            <div className="space-y-2 flex-1 min-w-0">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
                 <h4 className="text-sm font-extrabold text-red-950 uppercase tracking-wide">
                   Sensitive Credential Safety Notice
                 </h4>
-                <span className="text-[11px] font-bold bg-red-200 text-red-900 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] sm:text-[11px] font-bold bg-red-200 text-red-900 px-2 py-0.5 rounded-full w-fit">
                   {securityFindings.length} Active Security {securityFindings.length === 1 ? 'Alert' : 'Alerts'}
                 </span>
               </div>
-              <p className="text-xs text-red-900 leading-relaxed">
+              <p className="text-xs text-red-900 leading-relaxed break-words">
                 Raw secrets, cloud IAM keys, payment API secrets, and passwords must <strong>never</strong> be stored in unencrypted notes or shared over unsecured channels. 
                 Values have been automatically masked with redaction tokens (e.g., <code className="secret-badge">[REDACTED_AWS_KEY]</code>).
               </p>
-              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-red-800">
+              <div className="pt-1.5 flex flex-wrap items-center gap-1.5 sm:gap-3 text-xs text-red-800">
                 <span className="font-semibold flex items-center gap-1">
-                  <Shield className="w-3.5 h-3.5" />
+                  <Shield className="w-3.5 h-3.5 flex-shrink-0" />
                   Recommended Protocol:
                 </span>
-                <span>Instruct the client to revoke and roll the exposed token immediately and resubmit via <strong>1Password / Bitwarden</strong> encrypted vault share.</span>
+                <span className="break-words">Instruct the client to revoke and roll the exposed token immediately and resubmit via <strong>1Password / Bitwarden</strong> encrypted vault share.</span>
               </div>
             </div>
           </div>
@@ -107,14 +107,14 @@ export const FindingsList: React.FC<FindingsListProps> = ({
       )}
 
       {/* Analysis Controls and Filters Bar */}
-      <div className="scalezix-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="scalezix-card p-3.5 sm:p-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
         
         {/* Type and Status Filters */}
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-          <div className="flex items-center rounded-lg border border-slate-200 p-0.5 bg-slate-50 text-xs font-medium">
+          <div className="flex items-center rounded-lg border border-slate-200 p-0.5 bg-slate-50 text-xs font-medium w-full sm:w-auto overflow-x-auto">
             <button
               onClick={() => setFilterStatus('open')}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-md transition-colors whitespace-nowrap min-h-[36px] flex items-center justify-center ${
                 filterStatus === 'open' 
                   ? 'bg-white text-slate-900 shadow-sm font-bold' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -124,7 +124,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
             </button>
             <button
               onClick={() => setFilterStatus('resolved')}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-md transition-colors whitespace-nowrap min-h-[36px] flex items-center justify-center ${
                 filterStatus === 'resolved' 
                   ? 'bg-white text-slate-900 shadow-sm font-bold' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -134,7 +134,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
             </button>
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-md transition-colors whitespace-nowrap min-h-[36px] flex items-center justify-center ${
                 filterStatus === 'all' 
                   ? 'bg-white text-slate-900 shadow-sm font-bold' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -147,7 +147,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="select-field text-xs py-1.5 w-auto"
+            className="select-field text-xs py-1.5 w-full sm:w-auto min-h-[36px]"
           >
             <option value="all">All Finding Types</option>
             <option value="security_concern">Security & Credentials</option>
@@ -158,24 +158,24 @@ export const FindingsList: React.FC<FindingsListProps> = ({
         </div>
 
         {/* Trigger Analysis Buttons */}
-        <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-2.5 w-full md:w-auto justify-end">
           <button
             onClick={onTriggerGapAnalysis}
             disabled={isAnalyzing}
-            className="btn-secondary text-xs"
+            className="btn-secondary text-xs flex-1 sm:flex-initial min-h-[38px] sm:min-h-[36px] justify-center"
             title="Run instant deterministic rule-based gap check"
           >
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+            <CheckCircle className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
             <span>{isAnalyzing ? 'Checking...' : 'Run Gap Check'}</span>
           </button>
 
           <button
             onClick={onTriggerAiAnalysis}
             disabled={isAnalyzing}
-            className="btn-ai text-xs"
+            className="btn-ai text-xs flex-1 sm:flex-initial min-h-[38px] sm:min-h-[36px] justify-center"
             title="Run AI-assisted deep gap and technical analysis"
           >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+            <Sparkles className="w-3.5 h-3.5 text-cyan-200 flex-shrink-0" />
             <span>{isAnalyzing ? 'Auditing...' : 'AI Intelligent Audit'}</span>
           </button>
         </div>
@@ -184,8 +184,8 @@ export const FindingsList: React.FC<FindingsListProps> = ({
 
       {/* Findings List */}
       {filteredFindings.length === 0 ? (
-        <div className="scalezix-card p-12 text-center">
-          <CheckCircle className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
+        <div className="scalezix-card p-8 sm:p-12 text-center">
+          <CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-500 mx-auto mb-3" />
           <h4 className="text-base font-bold text-slate-800">
             {filterStatus === 'open' ? 'Zero Open Gaps' : 'No Findings Match Filter'}
           </h4>
@@ -203,7 +203,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
             return (
               <div 
                 key={finding.id}
-                className={`scalezix-card p-5 transition-all ${
+                className={`scalezix-card p-4 sm:p-5 transition-all ${
                   isResolved 
                     ? 'bg-slate-50/70 border-slate-200 opacity-75' 
                     : finding.has_sensitive_data_alert 
@@ -211,16 +211,16 @@ export const FindingsList: React.FC<FindingsListProps> = ({
                       : 'hover:border-slate-300'
                 }`}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   
                   {/* Left: Icon & Title */}
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5">
+                  <div className="flex items-start gap-3 min-w-0 flex-1">
+                    <div className="mt-0.5 flex-shrink-0">
                       {getTypeIcon(finding.finding_type)}
                     </div>
 
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
                         {getSeverityBadge(finding.severity)}
                         <span className="text-xs font-semibold text-slate-500">
                           {finding.finding_type_display}
@@ -228,25 +228,25 @@ export const FindingsList: React.FC<FindingsListProps> = ({
                         {finding.checklist_item_title && (
                           <>
                             <span className="text-slate-300">•</span>
-                            <span className="text-xs font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                            <span className="text-xs font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded truncate max-w-full">
                               {finding.checklist_item_title}
                             </span>
                           </>
                         )}
                         {finding.is_human_confirmed && (
-                          <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded">
+                          <span className="text-[10px] sm:text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded whitespace-nowrap">
                             Human Confirmed
                           </span>
                         )}
                       </div>
 
-                      <h4 className={`text-sm font-bold ${
+                      <h4 className={`text-sm font-bold break-words ${
                         isResolved ? 'text-slate-500 line-through' : 'text-slate-900'
                       }`}>
                         {finding.title}
                       </h4>
 
-                      <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                      <p className="text-xs text-slate-600 mt-2 leading-relaxed break-words">
                         {finding.explanation}
                       </p>
 
@@ -256,7 +256,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
                           <span className="font-bold text-slate-700 block mb-0.5">
                             Recommended Action:
                           </span>
-                          <p className="text-slate-600">
+                          <p className="text-slate-600 break-words leading-relaxed">
                             {finding.suggested_next_step}
                           </p>
                         </div>
@@ -265,10 +265,10 @@ export const FindingsList: React.FC<FindingsListProps> = ({
                   </div>
 
                   {/* Right: Actions (Mark Resolved / Human Confirm) */}
-                  <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 flex-shrink-0">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 justify-end flex-shrink-0">
                     <button
                       onClick={() => onToggleConfirm(finding.id, finding.is_human_confirmed)}
-                      className={`text-xs px-2.5 py-1.5 rounded-md border font-medium transition-colors ${
+                      className={`text-xs px-2.5 py-1.5 rounded-md border font-medium transition-colors min-h-[36px] flex items-center justify-center flex-1 sm:flex-initial ${
                         finding.is_human_confirmed
                           ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                           : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
@@ -280,13 +280,13 @@ export const FindingsList: React.FC<FindingsListProps> = ({
 
                     <button
                       onClick={() => onToggleResolve(finding.id, finding.status)}
-                      className={`text-xs px-3 py-1.5 rounded-md font-semibold transition-colors flex items-center gap-1.5 ${
+                      className={`text-xs px-3 py-1.5 rounded-md font-semibold transition-colors flex items-center justify-center gap-1.5 min-h-[36px] flex-1 sm:flex-initial ${
                         isResolved
                           ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                           : 'bg-slate-900 text-white hover:bg-slate-800'
                       }`}
                     >
-                      <Check className="w-3.5 h-3.5" />
+                      <Check className="w-3.5 h-3.5 flex-shrink-0" />
                       <span>{isResolved ? 'Re-open' : 'Mark Resolved'}</span>
                     </button>
                   </div>

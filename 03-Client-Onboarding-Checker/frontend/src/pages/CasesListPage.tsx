@@ -47,14 +47,14 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in fade-in duration-200">
+    <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8 animate-in fade-in duration-200">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <FileCheck2 className="w-6 h-6 text-emerald-600" />
-            Client Onboarding Cases
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <FileCheck2 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 flex-shrink-0" />
+            <span>Client Onboarding Cases</span>
           </h1>
           <p className="text-xs text-slate-500 mt-1">
             Track, audit, and verify client technical submissions across all active projects.
@@ -63,15 +63,15 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
 
         <button
           onClick={onOpenNewCase}
-          className="btn-primary text-xs"
+          className="btn-primary text-xs sm:text-sm w-full sm:w-auto min-h-[40px] sm:min-h-[38px] justify-center"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 flex-shrink-0" />
           <span>New Onboarding Case</span>
         </button>
       </div>
 
       {/* Toolbar */}
-      <div className="scalezix-card p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="scalezix-card p-3.5 sm:p-4 mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
         <div className="relative w-full md:w-80">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
             <Search className="w-4 h-4" />
@@ -81,15 +81,15 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by client, project, or company..."
-            className="input-field pl-9 text-xs"
+            className="input-field pl-9 text-xs min-h-[38px]"
           />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full md:w-auto">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="select-field text-xs py-1.5 w-auto"
+            className="select-field text-xs py-1.5 w-full min-h-[38px]"
           >
             <option value="all">All Statuses</option>
             <option value="in_review">In Review</option>
@@ -102,7 +102,7 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
           <select
             value={serviceFilter}
             onChange={(e) => setServiceFilter(e.target.value)}
-            className="select-field text-xs py-1.5 w-auto"
+            className="select-field text-xs py-1.5 w-full min-h-[38px]"
           >
             <option value="all">All Service Types</option>
             <option value="web_app">Web Application / MVP</option>
@@ -120,7 +120,7 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
           <p className="text-xs text-slate-500">Loading cases...</p>
         </div>
       ) : filteredCases.length === 0 ? (
-        <div className="scalezix-card p-12 text-center">
+        <div className="scalezix-card p-8 sm:p-12 text-center">
           <FolderGit2 className="w-12 h-12 text-slate-300 mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-800">No Cases Found</h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-5">
@@ -132,13 +132,13 @@ export const CasesListPage: React.FC<CasesListPageProps> = ({ onOpenNewCase }) =
               setStatusFilter('all');
               setServiceFilter('all');
             }}
-            className="btn-secondary text-xs"
+            className="btn-secondary text-xs min-h-[38px]"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredCases.map((c) => (
             <CaseCard key={c.id} caseItem={c} />
           ))}

@@ -37,35 +37,35 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({ logs }) => {
   };
 
   return (
-    <div className="scalezix-card p-6">
+    <div className="scalezix-card p-4 sm:p-6">
       <h3 className="text-sm font-bold text-slate-900 mb-6 flex items-center gap-2">
-        <Clock className="w-4 h-4 text-slate-500" />
-        Case Audit Trail & Activity Log
+        <Clock className="w-4 h-4 text-slate-500 flex-shrink-0" />
+        <span>Case Audit Trail & Activity Log</span>
       </h3>
 
-      <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+      <div className="relative pl-5 sm:pl-6 space-y-5 sm:space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
         {logs.map((log) => {
           const dateStr = new Date(log.timestamp).toLocaleString();
 
           return (
             <div key={log.id} className="relative flex items-start gap-3 group">
               {/* Dot marker */}
-              <div className="absolute -left-6 mt-1 w-4 h-4 rounded-full bg-white border-2 border-slate-400 group-hover:border-emerald-500 flex items-center justify-center transition-colors">
+              <div className="absolute -left-5 sm:-left-6 mt-1 w-4 h-4 rounded-full bg-white border-2 border-slate-400 group-hover:border-emerald-500 flex items-center justify-center transition-colors">
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-500 group-hover:bg-emerald-500 transition-colors" />
               </div>
 
               {/* Log Entry Content */}
-              <div className="flex-1 bg-slate-50 border border-slate-200/80 rounded-lg p-3 text-xs">
-                <div className="flex items-center justify-between gap-2 mb-1">
-                  <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                    {getActionIcon(log.action)}
-                    <span>{log.action}</span>
+              <div className="flex-1 bg-slate-50 border border-slate-200/80 rounded-lg p-3 text-xs min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                  <div className="flex items-center gap-1.5 font-bold text-slate-900 min-w-0">
+                    <span className="flex-shrink-0">{getActionIcon(log.action)}</span>
+                    <span className="break-words">{log.action}</span>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400">
+                  <span className="text-[11px] font-mono text-slate-400 whitespace-nowrap">
                     {dateStr}
                   </span>
                 </div>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed break-words">
                   {log.details}
                 </p>
               </div>
